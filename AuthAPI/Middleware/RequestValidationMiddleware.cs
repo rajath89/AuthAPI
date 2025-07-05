@@ -18,13 +18,13 @@ public class RequestValidationMiddleware
         public async Task InvokeAsync(HttpContext context, IRequestValidationService validationService)
         {
             if (context.Request.Path.Value?.Contains("/api/v") == true && 
-                context.Request.Path.Value.Contains("/auth"))
+                context.Request.Path.Value.Contains("/Auth"))
             {
                 var applicationId = context.Request.Headers["ApplicationId"].FirstOrDefault();
                 var traceId = context.Request.Headers["TraceId"].FirstOrDefault();
                 var securityToken = context.Request.Headers["SecurityToken"].FirstOrDefault();
                 
-                if (string.IsNullOrEmpty(applicationId) || string.IsNullOrEmpty(traceId) || string.IsNullOrEmpty(securityToken))
+                if (string.IsNullOrEmpty(applicationId) && string.IsNullOrEmpty(securityToken))
                 {
                     await WriteErrorResponse(context, "Missing required headers");
                     return;

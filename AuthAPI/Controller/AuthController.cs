@@ -95,13 +95,9 @@ namespace AuthAPI.Controller;
                     return BadRequest(CreateErrorResponse("Registration failed"));
                 }
                 
-                var token = _jwtTokenService.GenerateToken(user, request.TraceId);
-                
                 return Ok(new AuthResponse
                 {
-                    Completion = new Completion { Code = "SUCCESS", Value = "0" },
-                    Token = token,
-                    TokenType = "SSOTOKEN"
+                    Completion = new Completion { Code = "SUCCESS", Value = "0" }
                 });
             }
             catch (Exception)
