@@ -109,6 +109,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseMiddleware<RequestValidationMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
