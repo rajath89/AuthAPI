@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using AuthAPI.Models;
 using AuthAPI.Models.Request;
 using AuthAPI.Models.Response;
@@ -8,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace AuthAPI.Controller;
 
 [ApiController]
-    [Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;

@@ -17,7 +17,8 @@ public class RequestValidationMiddleware
         
         public async Task InvokeAsync(HttpContext context, IRequestValidationService validationService)
         {
-            if (context.Request.Path.StartsWithSegments("/api/auth"))
+            if (context.Request.Path.Value?.Contains("/api/v") == true && 
+                context.Request.Path.Value.Contains("/auth"))
             {
                 var applicationId = context.Request.Headers["ApplicationId"].FirstOrDefault();
                 var traceId = context.Request.Headers["TraceId"].FirstOrDefault();
